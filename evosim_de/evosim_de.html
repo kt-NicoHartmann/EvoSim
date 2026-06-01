@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EvoSim: Evolutionssimulation</title>
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- ── SIDEBAR ── -->
+    <div id="sidebar">
+        <div class="logo">
+            <h1>Evo<span>Sim</span></h1>
+            <p>Evolutionssimulation v1.0</p>
+        </div>
+        <!-- Steuerung -->
+        <div class="section">
+            <div class="section-title">Steuerung</div>
+            <div class="btn-row">
+                <button class="btn-primary" id="btnStart">▶ START</button>
+                <button class="btn-secondary" id="btnStop">⏸ PAUSE</button>
+            </div>
+            <div class="btn-row" style="margin-top:8px">
+                <button class="btn-secondary" id="btnRestart">↺ NEUSTART</button>
+                <button class="btn-secondary" id="btnRandom">⚄ ZUFALL</button>
+            </div>
+        </div>
+        <!-- Simulation -->
+        <div class="section">
+            <div class="section-title">Simulation</div>
+            <div class="ctrl-row">
+                <span class="ctrl-label">Lebewesen</span>
+                <span class="ctrl-value" id="vCreatures">40</span>
+            </div>
+            <input id="sCreatures" max="150" min="5" type="range" value="40" />
+            <div class="ctrl-row">
+                <span class="ctrl-label">Nahrung</span>
+                <span class="ctrl-value" id="vFood">80</span>
+            </div>
+            <input id="sFood" max="300" min="10" type="range" value="80" />
+            <div class="ctrl-row">
+                <span class="ctrl-label">Schnellvorlauf</span>
+                <span class="ctrl-value" id="vSpeed">1x</span>
+            </div>
+            <input id="sSpeed" max="10" min="1" type="range" value="1" />
+            <div class="ctrl-row">
+                <span class="ctrl-label">Mutationsrate</span>
+                <span class="ctrl-value" id="vMutation">0.05</span>
+            </div>
+            <input id="sMutation" max="50" min="1" type="range" value="5" />
+        </div>
+        <!-- Startgene -->
+        <div class="section">
+            <div class="section-title">Startgen (Durchschnitt)</div>
+            <div class="ctrl-row">
+                <span class="ctrl-label">Geschwindigkeit</span>
+                <span class="ctrl-value" id="vGSpeed">1.5</span>
+            </div>
+            <input id="sGSpeed" max="40" min="5" type="range" value="15" />
+            <div class="ctrl-row">
+                <span class="ctrl-label">Sichtweite</span>
+                <span class="ctrl-value" id="vGSight">80</span>
+            </div>
+            <input id="sGSight" max="200" min="20" type="range" value="80" />
+            <div class="ctrl-row">
+                <span class="ctrl-label">Groesse</span>
+                <span class="ctrl-value" id="vGSize">8</span>
+            </div>
+            <input id="sGSize" max="20" min="3" type="range" value="8" />
+        </div>
+        <!-- Ereignisse -->
+        <div class="section">
+            <div class="section-title">Ereignisse</div>
+            <div class="btn-row">
+                <button class="btn-warn" id="btnDrought">🌵 Duerre</button>
+                <button class="btn-danger" id="btnPlague">☠ Seuchenausbruch</button>
+            </div>
+            <div class="btn-row" style="margin-top:8px">
+                <button class="btn-purple" id="btnMutWave">🧬 Mutationswelle</button>
+                <button class="btn-orange" id="btnFoodBurst">🍀 Nahrungsschub</button>
+            </div>
+            <div class="btn-row" style="margin-top:8px">
+                <button class="btn-secondary" id="btnPoison">💜 Gift</button>
+                <button class="btn-secondary" id="btnPredator">🔴 Raeuber</button>
+            </div>
+        </div>
+        <!-- Statistiken -->
+        <div class="section">
+            <div class="section-title">Statistiken</div>
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <div class="s-label">Lebewesen</div>
+                    <div class="s-val" id="statPop">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="s-label">Generation</div>
+                    <div class="s-val" id="statGen">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="s-label">O Geschw.</div>
+                    <div class="s-val" id="statSpeed">—</div>
+                </div>
+                <div class="stat-box">
+                    <div class="s-label">O Groesse</div>
+                    <div class="s-val" id="statSize">—</div>
+                </div>
+                <div class="stat-box">
+                    <div class="s-label">O Sichtweite</div>
+                    <div class="s-val" id="statSight">—</div>
+                </div>
+                <div class="stat-box">
+                    <div class="s-label">Nahrung</div>
+                    <div class="s-val" id="statFood">0</div>
+                </div>
+            </div>
+        </div>
+        <!-- Log -->
+        <div class="event-log" id="eventLog">
+            <div class="section-title" style="margin-bottom:8px">EREIGNISPROTOKOLL</div>
+        </div>
+    </div>
+    <!-- ── MAIN ── -->
+    <div id="main">
+        <div id="topbar">
+            <div class="tb-item">
+                <div class="tb-dot"></div> <span id="tbAlive">0</span> am Leben</div>
+            <div class="tb-item">
+                <div class="tb-dot red"></div> <span id="tbDead">0</span> gestorben</div>
+            <div class="tb-item">
+                <div class="tb-dot orange"></div> <span id="tbBorn">0</span> geboren</div>
+            <div class="tb-item">GEN <span id="tbGen">0</span></div>
+            <div class="tb-item">TICK <span id="tbTick">0</span></div>
+        </div>
+        <div id="canvasWrapper">
+            <canvas id="simCanvas"></canvas>
+            <div id="eventBadge"></div>
+            <div id="tooltip"></div>
+            <div id="genBadge">GEN <span id="genNum">0</span></div>
+        </div>
+        <div id="geneChart">
+            <canvas id="chartCanvas"></canvas>
+            <!--<div id="chartLabel">GENTREND &#8212; Geschwindigkeit &middot; Sicht &middot; Groesse</div>-->
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
