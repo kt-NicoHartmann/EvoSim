@@ -18,13 +18,13 @@ EvoSim visualizes the core principles of evolutionary biology in an interactive,
 - **Live Event System:** Trigger environmental stressors at any time: droughts, plagues, mutation waves, or predator invasions. This is to stress-test the ecosystem and observe how populations adapt.
 - **Genetic Trend Graph:** An integrated live graph tracks how key traits shift across generations, making macro-level evolutionary trends visible in real time.
 - **Event Log & Hover Tooltips:** Dive deeper into population data with a running event log and interactive tooltips on individual creatures.
-- **Zero Dependencies:** A pure vanilla JavaScript implementation — complex autonomous agent logic and data visualization with no external libraries.
+- **Zero Dependencies:** A pure vanilla JavaScript implementation, complex autonomous agent logic and data visualization with no external libraries.
 
 ## Tech Stack
 
 - **HTML5 Canvas:** For all real-time creature rendering and simulation visualization.
 - **CSS3:** For sidebar layout, controls, and graph styling.
-- **JavaScript (Vanilla):** For the full simulation engine — agent behavior, genetics, energy dynamics, event handling, and live charting — entirely dependency-free.
+- **JavaScript (Vanilla):** For the full simulation engine: agent behavior, genetics, energy dynamics, event handling, and live charting, entirely dependency-free.
 
 ## Getting Started
 
@@ -41,11 +41,11 @@ git clone https://github.com/kt-NicoHartmann/EvoSim.git
 Navigate into the project directory and open the HTML file in your preferred web browser.
 
 ```bash
-cd evosim_en
+cd EvoSim/evosim_en/
 # On macOS/Linux:
-open project_evosim_en.html
+open evosim_en.html
 # On Windows:
-start project_evosim_en.html
+start evosim_en.html
 ```
 
 Alternatively, use an extension like Live Server in VS Code to host it locally.
